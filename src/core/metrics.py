@@ -1,5 +1,6 @@
 from typing import List, Dict, Tuple
-from proceso import Proceso
+from core.proceso import Proceso
+
 
 GanttEntry = Tuple[str, int, int]
 

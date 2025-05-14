@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import List, Tuple
-from proceso import Proceso
+from core.proceso import Proceso
 
 # Tipo de entrada del diagrama de Gantt
 GanttEntry = Tuple[str, int, int]
