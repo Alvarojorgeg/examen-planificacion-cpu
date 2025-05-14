@@ -1,6 +1,7 @@
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import tkinter as tk
 from tkinter import ttk, messagebox
 from core.proceso import Proceso
@@ -12,7 +13,8 @@ class InterfazPlanificador:
     def __init__(self, root):
         self.root = root
         self.root.title("Simulador de Planificación de CPU")
-        self.root.geometry("700x500")
+        self.root.geometry("700x750")
+        self.root.resizable(True, True)
 
         self.repo = RepositorioProcesos()
 
@@ -44,6 +46,25 @@ class InterfazPlanificador:
         self.tree.heading("prioridad", text="Prioridad")
         self.tree.pack(fill="both", expand=True, padx=10, pady=10)
 
+        # Marco para ejecución
+        frame_exec = ttk.LabelFrame(self.root, text="Ejecutar planificación")
+        frame_exec.pack(fill="x", padx=10, pady=10)
+
+        btn_fcfs = ttk.Button(frame_exec, text="Planificar FCFS", command=self.ejecutar_fcfs)
+        btn_fcfs.pack(side="left", padx=10, pady=5)
+
+        btn_rr = ttk.Button(frame_exec, text="Planificar Round Robin", command=self.ejecutar_rr)
+        btn_rr.pack(side="left", padx=10, pady=5)
+
+        ttk.Label(frame_exec, text="Quantum:").pack(side="left", padx=5)
+        self.entry_quantum = ttk.Entry(frame_exec, width=5)
+        self.entry_quantum.insert(0, "2")
+        self.entry_quantum.pack(side="left")
+
+        # Área de resultados
+        self.text_resultado = tk.Text(self.root, height=10)
+        self.text_resultado.pack(fill="both", expand=True, padx=10, pady=10)
+
     def agregar_proceso(self):
         pid = self.entry_pid.get()
         try:
@@ -58,6 +79,33 @@ class InterfazPlanificador:
             self.entry_pid.delete(0, tk.END)
             self.entry_duracion.delete(0, tk.END)
             self.entry_prioridad.delete(0, tk.END)
+
+    def ejecutar_fcfs(self):
+        scheduler = FCFSScheduler()
+        procesos = self.repo.listar()
+        gantt = scheduler.planificar(procesos)
+        metricas = calcular_metricas(procesos)
+        self.mostrar_resultado(gantt, metricas)
+
+    def ejecutar_rr(self):
+        try:
+            quantum = int(self.entry_quantum.get())
+            scheduler = RoundRobinScheduler(quantum)
+            procesos = self.repo.listar()
+            gantt = scheduler.planificar(procesos)
+            metricas = calcular_metricas(procesos)
+            self.mostrar_resultado(gantt, metricas)
+        except ValueError:
+            messagebox.showerror("Error", "Quantum debe ser un número entero positivo")
+
+    def mostrar_resultado(self, gantt, metricas):
+        self.text_resultado.delete("1.0", tk.END)
+        self.text_resultado.insert(tk.END, "Diagrama de Gantt:\n")
+        for entry in gantt:
+            self.text_resultado.insert(tk.END, f"PID: {entry[0]}, Inicio: {entry[1]}, Fin: {entry[2]}\n")
+        self.text_resultado.insert(tk.END, "\nMétricas Promedio:\n")
+        for k, v in metricas.items():
+            self.text_resultado.insert(tk.END, f"{k}: {v:.2f}\n")
 
 if __name__ == '__main__':
     root = tk.Tk()
