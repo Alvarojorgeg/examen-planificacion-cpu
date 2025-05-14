@@ -23,7 +23,7 @@ El sistema cuenta con una GUI completa donde puedes:
   - Diagrama de Gantt
   - Métricas promedio: tiempo de respuesta, espera y retorno
 
-<img src="./imagengit.png" alt="Captura GUI" width="300"/>
+<img src="./imagengit.png" alt="Captura GUI" width="450"/>
 
 ---
 
