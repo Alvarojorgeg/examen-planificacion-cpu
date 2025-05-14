@@ -1,89 +1,98 @@
 https://github.com/Alvarojorgeg/examen-planificacion-cpu
 
-# Simulador de Planificación de CPU
+# Simulador de Planificación de CPU (con Interfaz Gráfica)
 
-Este repositorio contiene un proyecto en Python orientado a objetos para simular la planificación de procesos en un sistema operativo. Se implementan algoritmos de planificación, almacenamiento en disco y pruebas automatizadas.
+![Diagrama de flujo](./diagram.png)
 
-Realizado por **Álvaro**, estudiante de Ingeniería Informática.
+![Screenshot](./imagengit.png)
+
+Este proyecto implementa un simulador de planificación de procesos de CPU utilizando Python, programación orientada a objetos y una interfaz gráfica desarrollada con **Tkinter**.
+
+🔧 **Desarrollado por Álvaro**, estudiante de Ingeniería Informática.
+
+---
+
+## 🖥️ Interfaz Gráfica (GUI)
+
+El sistema cuenta con una GUI completa donde puedes:
+
+- Registrar procesos (PID, duración, prioridad)
+- Visualizar procesos en una tabla interactiva
+- Ejecutar planificación con:
+  - FCFS (First-Come, First-Served)
+  - Round Robin (con quantum configurable)
+- Ver resultados:
+  - Diagrama de Gantt
+  - Métricas promedio: tiempo de respuesta, espera y retorno
+
+![Captura GUI](./screenshot.png) <!-- Puedes tomar una captura y renombrarla así -->
+
+---
 
 ## 📁 Estructura del Proyecto
 
 ```
 proyecto-scheduler/
 ├── src/
-│   ├── proceso.py              # Clase Proceso
-│   ├── scheduler.py            # FCFS y Round Robin
-│   ├── repositorio.py          # Repositorio y persistencia JSON/CSV
-│   ├── metrics.py              # Cálculo de métricas
-│   └── main.py                 # (opcional) CLI interactivo
+│   ├── core/
+│   │   ├── proceso.py
+│   │   ├── scheduler.py
+│   │   ├── repositorio.py
+│   │   └── metrics.py
+│   └── gui/
+│       └── interface.py
 ├── tests/
 │   ├── test_proceso.py
 │   ├── test_scheduler.py
 │   ├── test_repositorio.py
 │   └── test_metrics.py
+├── main.py  ← Ejecuta la GUI
 ├── requirements.txt
-├── pytest.ini
 └── README.md
 ```
 
-## ⚙️ Funcionalidades
+---
 
-- Registro de procesos con `PID`, duración y prioridad.
-- Implementación de dos algoritmos de planificación:
-  - **FCFS** (First-Come, First-Served)
-  - **Round Robin** con quantum configurable
-- Simulación con generación de diagrama de Gantt.
-- Cálculo de métricas:
-  - Tiempo de respuesta medio
-  - Tiempo de retorno medio
-  - Tiempo de espera medio
-- Persistencia en archivos JSON y CSV.
-- Pruebas unitarias con `pytest`.
+## ▶️ Cómo Ejecutar
 
-## ▶️ Ejecución
-
-### 1. Crear entorno virtual (opcional pero recomendado)
+1. (Opcional) Crear entorno virtual:
 ```bash
 python -m venv venv
-# En Windows:
-venv\Scripts\activate
-# En Mac/Linux:
-source venv/bin/activate
+venv\Scripts\activate  # Windows
 ```
 
-### 2. Instalar dependencias
+2. Instalar dependencias:
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Ejecutar pruebas
+3. Ejecutar la interfaz gráfica:
+```bash
+# Desde raíz del proyecto:
+$env:PYTHONPATH="src"  # PowerShell (o set PYTHONPATH=src en CMD)
+python main.py
+```
+
+---
+
+## 🧪 Ejecutar Pruebas Automáticas
+
+El proyecto incluye tests con `pytest`. Puedes correrlos así:
+
 ```bash
 pytest
 ```
 
-### 4. Ejecutar desde `main.py` (si se implementa interfaz CLI)
-```bash
-python src/main.py
-```
+---
 
-## ✅ Requisitos
+## 📌 Notas Finales
 
-- Python 3.10 o superior
-- `pytest` (ya incluido en `requirements.txt`)
+✅ Estructura profesional con separación entre lógica (`core`) y presentación (`gui`)
+✅ Código modular, probado y validado
+✅ Cobertura de casos clave con interfaz clara para el usuario
 
-## 📊 Ejemplo de Diagrama de Gantt
-```
-[("P1", 0, 4), ("P2", 4, 7), ("P3", 7, 9)]
-```
-
-## 📌 Notas
-
-Este proyecto fue desarrollado como ejercicio práctico para reforzar conceptos de:
-- Programación orientada a objetos
-- Algoritmos de planificación de CPU
-- Serialización de datos
-- Diseño de pruebas automatizadas
+Este proyecto fue desarrollado como ejercicio práctico de sistemas operativos y planificación de procesos, con enfoque en buenas prácticas y experiencia de usuario.
 
 ---
 
-💻 *Hecho con esfuerzo por Álvaro para la asignatura de Programación II.*
+💻 *Hecho con dedicación por Álvaro – Ingeniería Informática.*
