@@ -4,8 +4,6 @@ https://github.com/Alvarojorgeg/examen-planificacion-cpu
 
 ![Diagrama de flujo](./diagram.png)
 
-<img src="./imagengit.png" alt="Captura GUI" width="500"/>
-
 Este proyecto implementa un simulador de planificación de procesos de CPU utilizando Python, programación orientada a objetos y una interfaz gráfica desarrollada con **Tkinter**.
 
 🔧 **Desarrollado por Álvaro**, estudiante de Ingeniería Informática.
@@ -25,7 +23,7 @@ El sistema cuenta con una GUI completa donde puedes:
   - Diagrama de Gantt
   - Métricas promedio: tiempo de respuesta, espera y retorno
 
-![Captura GUI](./screenshot.png) <!-- Puedes tomar una captura y renombrarla así -->
+<img src="./imagengit.png" alt="Captura GUI" width="300"/>
 
 ---
 
